@@ -5,9 +5,9 @@ package com.company;
  */
 public class bankAccount implements Comparable {
 
-    public bankAccount(String nm, double amt) {
+    public bankAccount(String nm, double atm) {
         name = nm;
-        balance = amt;
+        balance = atm;
     }
 
     public int compareTo(Object otherObject) {
