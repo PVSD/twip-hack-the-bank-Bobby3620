@@ -16,8 +16,9 @@ public class Main {
         ArrayList aryLst = new ArrayList();
         ListIterator iter = aryLst.listIterator();
         FileWriter accountList = new FileWriter("list.txt", true);
-        ArrayList deposits = new ArrayList();
-        ArrayList accounts = new ArrayList();
+        FileWriter drainAccount = new FileWriter("drainAccount.txt", true);
+        ArrayList<Double> deposits = new ArrayList();
+        ArrayList<String> names = new ArrayList();
 
         do {
             Scanner kbReader = new Scanner(System.in);
@@ -27,13 +28,13 @@ public class Main {
 
             if (!name.equalsIgnoreCase("EXIT")) {
 
+                names.add(name);
                 System.out.println("Please enter the amount of the deposit. ");
                 amount = kbReader.nextDouble();
-                deposits.add(fmt.format(amount));
+                deposits.add(amount);
                 System.out.println(" "); // gives an eye pleasing blank line
                 // between accounts
                 bankAccount theAccount = new bankAccount(name, amount);
-                accounts.add(theAccount);
                 iter.add(theAccount);
                 System.out.println("Would you like to enter debug mode? (\"Y\" or \"N\") ");
                 debug = kbInput.nextLine();
@@ -43,8 +44,9 @@ public class Main {
                     //These vars are only needed in debug mode
                     String s;
                     String v;
+                    String d;
 
-                    accountList.write(name.toUpperCase() + " has an amount of: $" + fmt.format(amount));
+                    accountList.write(name.toUpperCase() + " has an amount of: $" + fmt.format(amount) + "\n");
                     System.out.println("This transaction was logged.");
                     System.out.println("Deposit amount from largest to smallest is available. (\"Press S\" to see) ");
                     s = kbInput.nextLine();
@@ -59,11 +61,18 @@ public class Main {
 
                         if (v.equalsIgnoreCase("V")){
 
-                            Collections.sort(accounts, Collections.reverseOrder());
-                            System.out.println(" "); //This is where I need to fix
+
+                            System.out.println("Drain all the deposits into your account (\"Press D\" to drain ");
+                            d = kbInput.nextLine();
+
+                            if (d.equalsIgnoreCase("D")){
+
+                                drainAccount.write("Deposited: " + fmt.format(deposits));
+                                System.out.println("This transaction was deposited into your account");
+
+                            }
 
                         }
-
                     }
 
                 }else{
