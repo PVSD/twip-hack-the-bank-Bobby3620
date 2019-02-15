@@ -60,7 +60,7 @@ public class Main {
                         if (v.equalsIgnoreCase("V")){
 
                             Collections.sort(accounts, Collections.reverseOrder());
-                            System.out.println();
+                            System.out.println(" "); //This is where I need to fix
 
                         }
 
